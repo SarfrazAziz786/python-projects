@@ -84,16 +84,16 @@ class Inventory:
     def __init__(self):
         self._products = {}
 
-    def add_product(self, product: Product) -> None:
+    def add_product(self, product: Product):
         self._products[product.product_id] = product  #use product_id as key 
 
-    def remove_product(self, product_id: str):
+    def remove_product(self, product_id):
         if product_id in self._products:
             del self._products[product_id]
             return True
         return False
 
-    def search_by_name(self, name: str):
+    def search_by_name(self, name):
         return [product for product in self._products.values() #list comprehension to filter products
                 if name.lower() in product.name.lower()]
 
