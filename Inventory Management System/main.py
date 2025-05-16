@@ -84,18 +84,18 @@ class Inventory:
     def __init__(self):
         self._products = {}
 
-    def add_product(self, product: Product):
-        self._products[product.product_id] = product  #use product_id as key 
+    def add_product(self, product):                     
+        self._products[product.product_id] = product  #use product_id as key / "M001": <Electronics object at memory_location> 
 
     def remove_product(self, product_id):
         if product_id in self._products:
-            del self._products[product_id]
+            del self._products[product_id] #accessing the dictionary to remove the product
             return True
         return False
 
     def search_by_name(self, name):
         return [product for product in self._products.values() #list comprehension to filter products
-                if name.lower() in product.name.lower()]
+                if name.lower() in product.name.lower()] #case insensitive search/  product hold product object
 
     def search_by_type(self, product_type: type):
         return [product for product in self._products.values()  #list comprehension to filter products by type
@@ -135,7 +135,7 @@ def main():
 
     # Add some products
     mobile = Electronics("M001", "V60", 34000, 5, 1, "LG")
-    banana = Grocery("G001", "Banana", 200, 100, datetime(2025, 5, 30))
+    banana = Grocery("G001", "Banana", 200, 100, datetime(2025, 5, 15))
     tshirt = Clothing("C001", "Cotton T-Shirt", 400, 50, "M", "Cotton")
 
     inventory.add_product(mobile)
@@ -149,7 +149,7 @@ def main():
 
     # Sell some products
     print("\nSelling 2 Mobiles...")
-    if inventory.sell_product("E001", 2):
+    if inventory.sell_product("M001", 2):
         print("Sale successful!")
     
     # Check total value
